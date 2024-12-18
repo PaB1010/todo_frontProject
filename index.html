@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>나의 할 일</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <script src="js/todo.js"></script>
-    </head>
-    <body>
-        
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ToDo List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/todo.js"></script>
+  </head>
+  <body>
+    <h1>My ToDo List</h1>
+    <!-- 마감일, 할 일, 완료 여부 -->
+    <form name="frmTodo" autocomplete="off">
+      <dl>
+        <dt>작업 제목</dt>
+        <dd>
+          <input type="text" name="title" />
+          <div class="error dn" id="error-title"></div>
+        </dd>
+      </dl>
+      <dl>
+        <dt>마감일</dt>
+        <dd>
+          <input type="date" name="deadline" />
+          <div class="error dn" id="error-deadline"></div>
+        </dd>
+      </dl>
+      <dl>
+        <dt>작업 내용</dt>
+        <dd>
+          <textarea name="description"></textarea>
+          <div class="error dn" id="error-description"></div>
+        </dd>
+      </dl>
+      <button type="submit">등록하기 ✔</button>
+    </form>
+
+    <ul class="items"></ul>
+  </body>
 </html>
