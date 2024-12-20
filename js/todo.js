@@ -1,6 +1,16 @@
 const todo = {
+  tpl: null,
+
   // 작업 목록
   items: [],
+
+  // DOMLoaded시 가장 먼저 호출할 예정
+  init() {
+    // 초기에 실행할 영역
+
+    // 템플릿 HTML 추출
+    this.tpl = document.getElementById("tpl").innerHTML;
+  },
 
   // 작업 등록
   add(title, description, deadline) {
@@ -28,23 +38,51 @@ const todo = {
 
   // 작업 목록 출력 & 갱식
   render() {
-    // 임시 (추후 코드 수정 예정)
     const itemsEl = document.querySelector(".items");
 
     itemsEl.innerHTML = "";
 
+    const domParser = new DOMParser();
+
     for (const { seq, title, description, deadline } of this.items) {
-      // 동적 요소 생성 - createElement (불편한 점 알아보기 위해 사용)
-      const li = document.createElement("li");
+      // tpl 호출 후 #{...}을 치환
+      let html = this.tpl;
+      html = html
+        .replace(/#{seq}/g, seq)
+        .replace(/#{title}/g, title)
+        // 줄개행이 안돼서 \n -> <br> 변환
+        .replace(/#{description}/g, description.replace(/\n/g, "<br>"))
+        .replace(/#{deadline}/g, deadline);
 
-      li.append(title);
+      const dom = domParser.parseFromString(html, "text/html");
 
-      itemsEl.append(li);
+      // 추가된 할 일 li 태그를 선택해 DOM 객체로 변환
+      const itemEl = dom.querySelector("li");
+
+      itemsEl.append(itemEl);
+
+      const titWrapEl = itemEl.querySelector(".tit-wrap");
+
+      titWrapEl.addEventListener("click", function () {
+        todo.accodianView(this.parentElemt);
+      });
     }
+  },
+
+  accodianView(el) {
+    const items = document.querySelectorAll(".items > .item");
+
+    items.forEach((item) => item.classList.remove("on"));
+
+    // 기존 on을 제거하고 el 에만 on 추가
+    el.classList.add("on");
   },
 };
 
 window.addEventListener("DOMContentLoaded", function () {
+  // 초기화
+  todo.init();
+
   // 양식 태그의 기본 동작 차단
   // 양식 제출해도 값이 남아있도록 하기 위해
   // 첫번째 매개 변수는 Event 객체로 고정, 관례적으로 e, ev 사용
