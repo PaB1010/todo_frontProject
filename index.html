@@ -39,5 +39,16 @@
     </form>
 
     <ul class="items"></ul>
+
+    <!-- 화면에 보이지 않게 html 사용하기 위해 사용 -->
+    <script type="text/html" id="tpl">
+      <li class="item on">
+        <div class="tit-wrap">
+          <span class="date">#{deadline}</span>
+          <span class="tit">#{title}</span>
+        </div>
+        <div class="description">#{description}</div>
+      </li>
+    </script>
   </body>
 </html>
