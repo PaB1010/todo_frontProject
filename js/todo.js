@@ -64,7 +64,7 @@ const todo = {
       const titWrapEl = itemEl.querySelector(".tit-wrap");
 
       titWrapEl.addEventListener("click", function () {
-        todo.accodianView(this.parentElemt);
+        todo.accodianView(this.parentElement);
       });
     }
   },
