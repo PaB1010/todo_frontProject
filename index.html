@@ -11,49 +11,83 @@
     <script src="js/todo.js"></script>
   </head>
   <body>
-    <h1>My ToDo List</h1>
-    <!-- 마감일, 할 일, 완료 여부 -->
-    <form name="frmTodo" autocomplete="off">
-      <dl>
-        <dt>작업 제목</dt>
-        <dd>
-          <input type="text" name="title" />
-          <div class="error dn" id="error-title"></div>
-        </dd>
-      </dl>
-      <dl>
-        <dt>마감일</dt>
-        <dd>
-          <input type="date" name="deadline" />
-          <div class="error dn" id="error-deadline"></div>
-        </dd>
-      </dl>
-      <dl>
-        <dt>작업 내용</dt>
-        <dd>
-          <textarea name="description"></textarea>
-          <div class="error dn" id="error-description"></div>
-        </dd>
-      </dl>
-      <button type="submit">등록하기 ✔</button>
-    </form>
+    <main>
+      <h1>My ToDo List</h1>
+      <!-- 마감일, 할 일, 완료 여부 -->
+      <form id="frmTodo" name="frmTodo" autocomplete="off">
+        <dl>
+          <dt>작업 제목</dt>
+          <dd>
+            <input type="text" name="title" />
+            <div class="error dn" id="error-title"></div>
+          </dd>
+        </dl>
+        <dl>
+          <dt>마감일</dt>
+          <dd>
+            <input type="date" name="deadline" />
+            <div class="error dn" id="error-deadline"></div>
+          </dd>
+        </dl>
+        <dl>
+          <dt>작업 내용</dt>
+          <dd>
+            <textarea name="description"></textarea>
+            <div class="error dn" id="error-description"></div>
+          </dd>
+        </dl>
+        <button type="submit">등록하기 ✔</button>
+      </form>
 
-    <ul class="items"></ul>
+      <form name="frmSearch" class="search-box">
+        <input type="text" name="skey" placeholder="검색어 입력" />
+        정렬 :
+        <select name="sort">
+          <option value="seq_asc">등록순</option>
+          <option value="seq_desc">최신순</option>
+          <option value="deadline_asc">마감일순(오름차)</option>
+          <option value="deadline_desc">마감일순(내림차)</option>
+        </select>
+      </form>
 
-    <!-- 화면에 보이지 않게 html 사용하기 위해 사용 -->
-    <script type="text/html" id="tpl">
-      <li class="item" data-seq="#{seq}">
-        <div class="tit-wrap">
-          <span class="date">#{deadline}</span>
-          <span class="tit">#{title}</span>
-        </div>
-        <div class="description">
-          #{description}
-          <button type="button" class="remove">
-            <i class="xi-close"></i>
-          </button>
-        </div>
-      </li>
-    </script>
+      <ul class="items"></ul>
+
+      <!-- 화면에 보이지 않게 html 사용하기 위해 사용 -->
+      <script type="text/html" id="tpl">
+        <li class="item#{addClass}" data-seq="#{seq}">
+          <div class="tit-wrap">
+            <span class="date">#{deadline}</span>
+            <span class="tit">#{title}</span>
+          </div>
+          <div class="description">
+            #{description}
+            <div class="controls">
+              <div class="done-wrap">
+                <input
+                  type="radio"
+                  name="done_#{seq}"
+                  value="true"
+                  id="done-true"
+                  #{checkedTrue}
+                />
+                <label for="done-true">작업 완료</label>
+                <input
+                  type="radio"
+                  name="done_#{seq}"
+                  value="false"
+                  id="done-false"
+                  #{checkedFalse}
+                />
+                <label for="done-false">작업중</label>
+              </div>
+              <button type="button" class="remove">
+                <i class="xi-close"></i>
+              </button>
+            </div>
+          </div>
+          <!--// controls -->
+        </li>
+      </script>
+    </main>
   </body>
 </html>
