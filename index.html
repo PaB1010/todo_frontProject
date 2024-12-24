@@ -71,18 +71,18 @@
                   type="radio"
                   name="done_#{seq}"
                   value="true"
-                  id="done-true"
+                  id="done-true-#{seq}"
                   #{checkedTrue}
                 />
-                <label for="done-true">작업 완료</label>
+                <label for="done-true-#{seq}">작업 완료</label>
                 <input
                   type="radio"
                   name="done_#{seq}"
                   value="false"
-                  id="done-false"
+                  id="done-false-#{seq}"
                   #{checkedFalse}
                 />
-                <label for="done-false">작업중</label>
+                <label for="done-false-#{seq}">작업중</label>
               </div>
               <button type="button" class="remove">
                 <i class="xi-close"></i>

@@ -135,7 +135,7 @@ h1 {
 /* 할 일 등록 양식 E */
 
 /* 할 일 목록 S */
-.items > item {
+.items > .item {
   padding: 15px 25px;
 }
 
