@@ -16,7 +16,7 @@ html {
 
 main {
   max-width: 650px;
-  /* max-height: 450px; */
+  min-width: 450px;
   margin: 40px auto;
   background: #fff;
   border-radius: 25px;
@@ -74,7 +74,7 @@ textarea {
 }
 
 h1 {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid lightsteelblue;
   padding-bottom: 7px;
   margin-bottom: 0 0 30px;
 }
@@ -99,18 +99,128 @@ h1 {
   border-radius: 2px;
 }
 
+#frmTodo button[type="submit"] {
+  background: lightsteelblue;
+  color: #fff;
+  width: 100%;
+  height: 45px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+}
+
+#frmTodo button[type="submit"]:hover {
+  background-color: steelblue;
+}
+
+.search-box {
+  display: flex;
+  margin: 25px 0 15px 0;
+  gap: 5px;
+}
+
+.search-box input[type="text"] {
+  /* 너비를 없애서 정확하게 flex-grow 되도록 */
+  width: 0;
+  flex-grow: 2;
+}
+
+.search-box select {
+  width: 0;
+  flex-grow: 1;
+  /* margin-left: 5px; */
+}
+
 /* 할 일 등록 양식 E */
 
 /* 할 일 목록 S */
+.items > item {
+  padding: 15px 25px;
+}
+
+/* 첫번째 item만 제외한 모든 item */
+.items > .item + .item {
+  border-top: 2px dashed lightsteelblue;
+}
+
+items > .item .tit-wrap {
+  font-size: 1.25rem;
+}
+
 .items > .item .description {
   display: none;
+  transition: all 0.5s;
 }
 
 .items > .item.on .description {
-  display: block;
+  display: flex;
+}
+
+.items .description {
+  flex-direction: column;
+  min-height: 180px;
+}
+
+.items .description .content {
+  padding: 15px;
+  background: lightsteelblue;
+  border-radius: 5px;
+  margin-top: 15px;
+  flex-grow: 1;
+}
+
+.items .controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  align-items: center;
+}
+
+.items .controls .remove {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid gray;
+  background: #fff;
+  text-align: center;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.tiems .controls .remove i {
+  font-weight: 900;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0;
 }
 
 .items > .item.done {
   text-decoration: line-through;
 }
+
+/* 라디오 버튼 공통 S */
+
+input[type="radio"] {
+  display: none;
+}
+
+/* radio 바로 옆 형제인 label */
+input[type="radio"] + label {
+  padding: 0 10px 0 33px;
+  /* inline 속성이라 block 있어야 width & height 설정 가능*/
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  background: url("../images/radio.png") no-repeat left center;
+  cursor: pointer;
+}
+
+/* 가상 선택자 - 요소의 상태로 선택 */
+input[type="radio"]:checked + label {
+  background: url("../images/radio_on.png") no-repeat left center;
+}
+
+/* 라디오 버튼 공통 E */
+
 /* 할 일 목록 E */

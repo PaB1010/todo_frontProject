@@ -40,8 +40,12 @@
       </form>
 
       <form name="frmSearch" class="search-box">
-        <input type="text" name="skey" placeholder="검색어 입력" />
-        정렬 :
+        <input
+          type="text"
+          name="skey"
+          placeholder="검색어 입력"
+          autocapitalize="off"
+        />
         <select name="sort">
           <option value="seq_asc">등록순</option>
           <option value="seq_desc">최신순</option>
@@ -60,7 +64,7 @@
             <span class="tit">#{title}</span>
           </div>
           <div class="description">
-            #{description}
+            <div class="content">#{description}</div>
             <div class="controls">
               <div class="done-wrap">
                 <input
